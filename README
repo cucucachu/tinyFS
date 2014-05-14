@@ -1,0 +1,39 @@
+Cody Jones
+Charles Lockner
+Chase Kragenbrink
+
+Our TinyFS program should be working fully to the spec, including re-writing to a file that's bigger
+or smaller than the current size, opening many files at a time, re-writing data to a file when the disk is full (as long 
+as it can fit all the new data of course), printing the files along with their timestamps, deleting
+files, reading a byte, and writing a byte.
+
+There are debugging functions that we left in that can be run through the demo file (type 'h' to see
+these options). They include printing all the blocks, printing one block, and printing the file 
+descriptor table.
+
+In the demo driver, the only way to write to file is to pass an integer number of bytes, which will 
+then write that many bytes to the file. The source is a "love story" as shown in tinyFsDemo.c. It's 
+5000 characters long, so 5000 bytes.
+
+Additional areas we implemented:
+   Option B: Directory listing and renameing.
+      int tfs_rename(char * oldname, char * newname);
+      int tfs_readdir();
+   Option D: Read-only and writeByte support.
+      int tfs_makeRW(char *name);
+      int tfs_makeRO(char *name);
+      int tfs_writeByte(fileDescriptor FD, unsigned char data);
+   Option E: Timestamps
+      char* tfs_readFileInfo(fileDescriptor FD); // returns a string with the timestamp
+
+Partially implemented:
+	Option H: File system consistency checks.
+		tfs_mount() will check for the correct magic number in superblock and that every
+		block fits a defined block type.
+
+Notes:
+	Setting tfs_errno automatically calls a function to print an error message.
+
+Bugs:
+   No known bugs as long as proper data is sent from the Demo driver.
+
